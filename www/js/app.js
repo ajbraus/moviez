@@ -40,24 +40,25 @@ angular.module('moviez', ['ionic', 'moviez.controllers', 'moviez.services'])
     controller: 'AppCtrl'
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.search', {
+    url: "/search",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html",
-        controller: 'MoviesCtrl'
+        templateUrl: "templates/search.html",
+        controller: 'SearchCtrl'
       }
     }
   })
-  .state('app.playlists', {
-    url: "/playlists",
+  .state('app.recent', {
+    url: "/recent",
+    cache: false, // to prevent caching otherwise does not update localstorage each time.
     views: {
       'menuContent': {
-        templateUrl: "templates/playlists.html",
+        templateUrl: "templates/recent.html",
         controller: 'RecentMoviesCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/browse');
+  $urlRouterProvider.otherwise('/app/search');
 });

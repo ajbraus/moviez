@@ -37,11 +37,7 @@ angular.module('moviez.controllers', [])
   $scope.recent_movies = JSON.parse(localStorage.getItem('recent_movies'));
 })
 
-.controller('PlaylistCtrl', function($scope, $rootScope) {
-  $scope.recent_movies = JSON.parse(localStorage.getItem('recent_movies')); //$rootScope.recent_movies
-})
-
-.controller('MoviesCtrl', function($scope, $rootScope, $http) {
+.controller('SearchCtrl', function($scope, $http) {
   $scope.search = {};
 
   $scope.search = function() {
@@ -55,15 +51,20 @@ angular.module('moviez.controllers', [])
           $scope.error = data.Error;
         } else {
           $scope.movies = [data]
-          //Add Movie to Recent Movies
-          var recent_movies = JSON.parse(localStorage.getItem('recent_movies'));
-          if (recent_movies == null) {
-            recent_movies = [];
+          
+          //Fetching Recent Movies
+          $scope.recent_movies = JSON.parse(localStorage.getItem('recent_movies'));
+          if ($scope.recent_movies == null) {
+            $scope.recent_movies = [];
           }
-          recent_movies.unshift(data);
-          localStorage.setItem('recent_movies', JSON.stringify(recent_movies));
-          $rootScope.recent_movies = recent_movies;
-          $scope.recent_movies = recent_movies;
+          console.log(data);
+
+          //preventing dups
+          if (data.Title != $scope.recent_movies[0].Title) {
+            //Add Movie to Recent Movies
+            $scope.recent_movies.unshift(data);
+            localStorage.setItem('recent_movies', JSON.stringify($scope.recent_movies));
+          }
         }
       })
   }
