@@ -1,0 +1,2 @@
+make recent searches list
+searching movie adds to "Recent Searches" list

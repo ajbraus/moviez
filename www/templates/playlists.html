@@ -1,0 +1,10 @@
+<ion-view view-title="Recent Searches">
+  <ion-content>
+    <div class='list'>
+      <div ng-hide="recent_movies.length > 0" class="item">
+        <h4>No Recent Searches</h4>
+      </div>
+      <div ng-include="'templates/movie.html'" ng-repeat="movie in recent_movies">
+    </div>
+  </ion-content>
+</ion-view>
